@@ -11,6 +11,7 @@ export class BarComponent {
 
   url: string = '/foo'
   src: SafeResourceUrl = ''
+  error: any
 
   constructor(public sanitizer: DomSanitizer) { }
 
@@ -20,14 +21,18 @@ export class BarComponent {
 
   onFrameLoaded() {
     if (!this.iframe) return
-    const document = this.iframe.nativeElement.contentWindow!.document
-    const elmnt = document.body;
-    
-    elmnt.addEventListener('mouseover', (e) => {
-      const el = document
-      .elementFromPoint(e.clientX, e.clientY)
-      console.log(el)
-    })
+    try {
+      const document = this.iframe.nativeElement.contentWindow!.document
+      const elmnt = document.body;
+      
+      elmnt.addEventListener('mouseover', (e) => {
+        const el = document
+        .elementFromPoint(e.clientX, e.clientY)
+        console.log(el)
+      })
+    } catch (error) {
+      this.error = error
+    }
 
     // elmnt.addEventListener('mouseout', (e) => {
     //   const el = document
