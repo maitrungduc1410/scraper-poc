@@ -1,0 +1,16 @@
+<div>
+  <input
+    type="text"
+    [(ngModel)]="url"
+  >
+  <button (click)="submit()">Submit</button>
+</div>
+<div>
+  <iframe
+    #iframe
+    [src]="src"
+    width="800"
+    height="600"
+    (load)="onFrameLoaded()"
+  ></iframe>
+</div>
